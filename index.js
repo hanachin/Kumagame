@@ -1,8 +1,3 @@
-// forked from phi's "enchant.js - Sprite クラスを継承して独自のクラスを生成しよう" http://jsdo.it/phi/gidz
-// forked from phi's "enchant.js - Sprite を表示しよう" http://jsdo.it/phi/kAKa
-// forked from phi's "enchant.js - Entity を生成してSceneに追加しよう" http://jsdo.it/phi/tlgU
-// forked from phi's "enchant.js のテンプレートを用意しよう" http://jsdo.it/phi/isoa
-// おまじない(using namespace enchant)
 enchant();
 
 var CHARA_IMAGE_NAME = "http://enchantjs.com/assets/images/chara1.gif";
@@ -10,21 +5,21 @@ var GAME_LIMIT_TIME = 30;
 var KUMA_SCORE = 10;
 var game = null;
 
-// クマクラス
+
 var KumaSprite = Class.create(Sprite, {
-    // 初期化
+    
     initialize: function() {
-	Sprite.call(this, 32, 32);	// 親クラスの初期化を忘れないように気をつけよう♪
+	Sprite.call(this, 32, 32);	
 	
-	this.image = game.assets[CHARA_IMAGE_NAME];	// 画像をセット
+	this.image = game.assets[CHARA_IMAGE_NAME];	
 	var deg = Math.random()*360*Math.PI/180;
 	this.vx = Math.cos(deg);
 	this.vy = Math.sin(deg);
     },
     
-    // 更新処理
+    
     onenterframe: function() {
-	// 移動
+	
 	this.moveBy(this.vx*4, this.vy*4);
 	
 	var left = 0;
@@ -37,7 +32,7 @@ var KumaSprite = Class.create(Sprite, {
 	if (this.y > bottom) { this.y = bottom; this.vy*=-1; }
     },
     
-    // タッチされたら消す
+    
     ontouchstart: function() {
 	this.parentNode.removeChild(this);
     }
@@ -45,8 +40,8 @@ var KumaSprite = Class.create(Sprite, {
 
 window.onload = function() {
     game = new Game();
-    game.preload(CHARA_IMAGE_NAME);	// 画像読み込み
-    game.fps = 30;	// fsp を 60 に変更
+    game.preload(CHARA_IMAGE_NAME);	
+    game.fps = 30;
     
     game.onload = function() {
 	var scene = game.rootScene;
@@ -90,11 +85,11 @@ window.onload = function() {
 	}
 };
 
-	// スプライト生成
+	
 	for (var i=0; i<16; ++i) {
-	    var kuma = new KumaSprite();	// クマスプライト生成
+	    var kuma = new KumaSprite();	
 	    kuma.moveTo( Math.random()*(game.width-kuma.width), Math.random()*(game.height-kuma.height) );
-	    scene.addChild(kuma);		// シーンに追加
+	    scene.addChild(kuma);		
 	}
     };
     
