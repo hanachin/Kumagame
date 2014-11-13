@@ -95,6 +95,9 @@ var KumaGame = Class.create(Game, {
         this.score = 0;
 
         this.rootScene.backgroundColor = 'black';
+    },
+    scoreMessage: function() {
+        return this.score + '点獲得しました!';
     }
 });
 
@@ -124,8 +127,7 @@ window.onload = function() {
             timerLabel.updateTimeLeft(timeLeft);
 
             if (timeLeft <= 0) {
-                var message = game.score + "点獲得しました!";
-                alert(message);
+                alert(game.scoreMessage());
                 scene.onenterframe = null;
             }
         };
