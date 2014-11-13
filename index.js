@@ -122,8 +122,7 @@ var KumaGame = Class.create(Game, {
 
         scene.backgroundColor = 'black';
 
-        this.initScoreLabel();
-        scene.addChild(this.scoreLabel);
+        scene.addChild(this.createScoreLabel());
 
         this.initTimerLabel();
         scene.addChild(this.timerLabel);
@@ -138,9 +137,9 @@ var KumaGame = Class.create(Game, {
             }
         };
     },
-    initScoreLabel: function() {
+    createScoreLabel: function() {
         var self = this;
-        this.scoreLabel = new ScoreLabel({
+        return new ScoreLabel({
             x: 10,
             y: 10,
             score: function() {
