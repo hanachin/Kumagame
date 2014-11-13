@@ -70,12 +70,12 @@ window.onload = function() {
         scoreLabel.moveTo(10, 10);
         scoreLabel.color = "white";
         scoreLabel.font = "11px'Consolas','Monaco','MS ゴシック'",
-            scoreLabel.text = "Score:"
+            scoreLabel.text = "Score:";
 
         timerLabel = new Label();
         scene.addChild(timerLabel);
         timerLabel.moveTo(250, 10);
-        timerLabel.color = "white"
+        timerLabel.color = "white";
         timerLabel.font = "11px'Consolas','Monaco','MS ゴシック'",
             timerLabel.text = "Timer:";
 
