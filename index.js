@@ -182,7 +182,7 @@ var KumaGame = Class.create(Game, {
     createKuma: function() {
         var game = this;
         var kuma = new KumaSprite({
-            image: this.assets[KumaSprite.CHARA_IMAGE_NAME],
+            image: this.assets[KumaSprite.CHARA_IMAGE_NAME], // image渡すのちょっとキモい
             dead: function(k) {
                 game.score += k.score;
             }
