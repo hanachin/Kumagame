@@ -115,11 +115,21 @@ var KumaGame = Class.create(Game, {
 
         this.initScoreLabel();
         this.rootScene.addChild(this.scoreLabel);
+
+        this.initTimerLabel();
+        this.rootScene.addChild(this.timerLabel);
     },
     initScoreLabel: function() {
         this.scoreLabel = new ScoreLabel({
             x: 10,
             y: 10
+        });
+    },
+    initTimerLabel: function() {
+        this.timerLabel = new TimerLabel({
+            x: 250,
+            y: 10,
+            timeLeft: this.timeLimit
         });
     }
 });
@@ -133,17 +143,10 @@ window.onload = function() {
     game.onload = function() {
         var scene = game.rootScene;
 
-        var timerLabel = new TimerLabel({
-            x: 250,
-            y: 10,
-            timeLeft: game.timeLimit
-        });
-        scene.addChild(timerLabel);
-
         scene.onenterframe = function() {
             game.scoreLabel.updateScore(game.score);
 
-            timerLabel.updateTimeLeft(game.timeLeft());
+            game.timerLabel.updateTimeLeft(game.timeLeft());
 
             if (game.isEnd()) {
                 game.end();
