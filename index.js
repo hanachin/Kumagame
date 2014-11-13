@@ -103,8 +103,6 @@ var KumaGame = Class.create(Game, {
         this.score = 0;
         this.timeLimit = options.timeLimit;
         this.kumaNum = options.kumaNum;
-
-        this.initRootScene();
     },
     scoreMessage: function() {
         return this.score + '点獲得しました!';
@@ -179,8 +177,8 @@ window.onload = function() {
     });
 
     game.onload = function() {
+        game.initRootScene();
         var scene = game.rootScene;
-
         scene.onenterframe = function() {
             if (game.isEnd()) {
                 game.end();
