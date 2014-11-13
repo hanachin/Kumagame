@@ -123,9 +123,7 @@ var KumaGame = Class.create(Game, {
         scene.backgroundColor = 'black';
 
         scene.addChild(this.createScoreLabel());
-
-        this.initTimerLabel();
-        scene.addChild(this.timerLabel);
+        scene.addChild(this.createTimerLabel());
 
         for (var i = 0; i < this.kumaNum; ++i) {
             scene.addChild(this.createKuma());
@@ -147,9 +145,9 @@ var KumaGame = Class.create(Game, {
             }
         });
     },
-    initTimerLabel: function() {
+    createTimerLabel: function() {
         var self = this;
-        this.timerLabel = new TimerLabel({
+        return new TimerLabel({
             x: 250,
             y: 10,
             timeLeft: function() {
