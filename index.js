@@ -5,7 +5,8 @@ enchant();
 var KumaSprite = Class.create(Sprite, {
     initialize: function(options) {
         Sprite.call(this, 32, 32);
-
+        this.score = options.score || KumaSprite.SCORE
+        this.deadCallback = options.dead;
         this.image = options.image;
         var deg = Math.random() * 360 * Math.PI / 180;
         this.vx = Math.cos(deg);
@@ -43,6 +44,9 @@ var KumaSprite = Class.create(Sprite, {
 
     dead: function() {
         this.parentNode.removeChild(this);
+        if (this.deadCallback) {
+          this.deadCallback(this);
+        }
     },
 
     ontouchstart: function() {
@@ -50,7 +54,7 @@ var KumaSprite = Class.create(Sprite, {
     }
 });
 KumaSprite.CHARA_IMAGE_NAME = "http://enchantjs.com/assets/images/chara1.gif";
-KumaSprite.KUMA_SCORE = 10;
+KumaSprite.SCORE = 10;
 
 var ScoreLabel = Class.create(Label, {
     initialize: function(options) {
@@ -176,8 +180,12 @@ var KumaGame = Class.create(Game, {
     },
 
     createKuma: function() {
+        var game = this;
         var kuma = new KumaSprite({
-            image: this.assets[KumaSprite.CHARA_IMAGE_NAME]
+            image: this.assets[KumaSprite.CHARA_IMAGE_NAME],
+            dead: function(k) {
+                game.score += k.score;
+            }
         });
         kuma.moveTo(Math.random() * (this.width - kuma.width), Math.random() * (this.height - kuma.height));
         return kuma;
