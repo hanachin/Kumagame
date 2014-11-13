@@ -19,26 +19,34 @@ var KumaSprite = Class.create(Sprite, {
         var right = this.parentNode.width - this.width;
         var top = 0;
         var bottom = this.parentNode.height - this.height;
+
         if (this.x < left) {
             this.x = left;
             this.vx *= -1;
         }
+
         if (this.x > right) {
             this.x = right;
             this.vx *= -1;
         }
+
         if (this.y < top) {
             this.y = top;
             this.vy *= -1;
         }
+
         if (this.y > bottom) {
             this.y = bottom;
             this.vy *= -1;
         }
     },
 
-    ontouchstart: function() {
+    dead: function() {
         this.parentNode.removeChild(this);
+    },
+
+    ontouchstart: function() {
+        this.dead();
     }
 });
 KumaSprite.CHARA_IMAGE_NAME = "http://enchantjs.com/assets/images/chara1.gif";
