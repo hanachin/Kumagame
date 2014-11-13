@@ -104,6 +104,10 @@ var KumaGame = Class.create(Game, {
     },
     isEnd: function() {
         return this.timeLeft() <= 0;
+    },
+    end: function() {
+        alert(this.scoreMessage());
+        this.rootScene.onenterframe = null;
     }
 });
 
@@ -134,8 +138,7 @@ window.onload = function() {
             timerLabel.updateTimeLeft(game.timeLeft());
 
             if (game.isEnd()) {
-                alert(game.scoreMessage());
-                scene.onenterframe = null;
+                game.end();
             }
         };
 
