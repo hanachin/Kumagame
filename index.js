@@ -95,7 +95,7 @@ var KumaGame = Class.create(Game, {
         this.timeLimit = options.timeLimit;
         this.kumaNum = options.kumaNum;
 
-        this.rootScene.backgroundColor = 'black';
+        this.initRootScene();
     },
     scoreMessage: function() {
         return this.score + '点獲得しました!';
@@ -109,6 +109,9 @@ var KumaGame = Class.create(Game, {
     end: function() {
         alert(this.scoreMessage());
         this.rootScene.onenterframe = null;
+    },
+    initRootScene: function() {
+      this.rootScene.backgroundColor = 'black';
     }
 });
 
