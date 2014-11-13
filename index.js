@@ -111,7 +111,16 @@ var KumaGame = Class.create(Game, {
         this.rootScene.onenterframe = null;
     },
     initRootScene: function() {
-      this.rootScene.backgroundColor = 'black';
+        this.rootScene.backgroundColor = 'black';
+
+        this.initScoreLabel();
+        this.rootScene.addChild(this.scoreLabel);
+    },
+    initScoreLabel: function() {
+        this.scoreLabel = new ScoreLabel({
+            x: 10,
+            y: 10
+        });
     }
 });
 
@@ -124,12 +133,6 @@ window.onload = function() {
     game.onload = function() {
         var scene = game.rootScene;
 
-        var scoreLabel = new ScoreLabel({
-            x: 10,
-            y: 10
-        });
-        scene.addChild(scoreLabel);
-
         var timerLabel = new TimerLabel({
             x: 250,
             y: 10,
@@ -138,7 +141,7 @@ window.onload = function() {
         scene.addChild(timerLabel);
 
         scene.onenterframe = function() {
-            scoreLabel.updateScore(game.score);
+            game.scoreLabel.updateScore(game.score);
 
             timerLabel.updateTimeLeft(game.timeLeft());
 
