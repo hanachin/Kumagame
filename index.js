@@ -123,7 +123,7 @@ var KumaGame = Class.create(Game, {
         alert(this.scoreMessage());
         this.rootScene.onenterframe = null;
     },
-    initRootScene: function() {
+    onload: function() {
         var game = this;
         var scene = this.rootScene;
 
@@ -182,10 +182,6 @@ window.onload = function() {
         timeLimit: 30,
         kumaNum: 16
     });
-
-    game.onload = function() {
-        game.initRootScene();
-    };
 
     game.start();
 };
