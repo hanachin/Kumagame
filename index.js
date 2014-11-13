@@ -57,11 +57,15 @@ var ScoreLabel = Class.create(Label, {
 
         this.color = 'white';
         this.font = "11px'Consolas','Monaco','MS ゴシック'";
-        this.text = 'Score:';
         this.moveTo(options.x, options.y);
+        this.score = options.score;
+        this.updateScore();
     },
-    updateScore: function(score) {
-        this.text = 'Score:' + game.score;
+    onenterframe: function() {
+        this.updateScore();
+    },
+    updateScore: function() {
+        this.text = 'Score:' + this.score();
     }
 });
 
@@ -120,9 +124,13 @@ var KumaGame = Class.create(Game, {
         this.rootScene.addChild(this.timerLabel);
     },
     initScoreLabel: function() {
+        var self = this;
         this.scoreLabel = new ScoreLabel({
             x: 10,
-            y: 10
+            y: 10,
+            score: function() {
+                return self.score;
+            }
         });
     },
     initTimerLabel: function() {
@@ -144,10 +152,7 @@ window.onload = function() {
         var scene = game.rootScene;
 
         scene.onenterframe = function() {
-            game.scoreLabel.updateScore(game.score);
-
             game.timerLabel.updateTimeLeft(game.timeLeft());
-
             if (game.isEnd()) {
                 game.end();
             }
