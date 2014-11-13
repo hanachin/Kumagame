@@ -128,10 +128,9 @@ var KumaGame = Class.create(Game, {
         this.initTimerLabel();
         scene.addChild(this.timerLabel);
 
-        this.initKumas();
-        this.kumas.forEach(function(kuma) {
-            scene.addChild(kuma);
-        });
+        for (var i = 0; i < this.kumaNum; ++i) {
+            scene.addChild(this.createKuma());
+        }
 
         scene.onenterframe = function() {
             if (game.isEnd()) {
@@ -165,13 +164,6 @@ var KumaGame = Class.create(Game, {
         });
         kuma.moveTo(Math.random() * (this.width - kuma.width), Math.random() * (this.height - kuma.height));
         return kuma;
-    },
-    initKumas: function() {
-        var kumas = [];
-        for (var i = 0; i < this.kumaNum; ++i) {
-            kumas.push(this.createKuma());
-        }
-        this.kumas = kumas;
     }
 });
 
