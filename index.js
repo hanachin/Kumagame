@@ -85,10 +85,19 @@ var TimerLabel = Class.create(Label, {
     }
 });
 
+var KumaGame = Class.create(Game, {
+    initialize: function(options) {
+        Game.call(this);
+
+        this.preload(CHARA_IMAGE_NAME);
+        this.fps = 30;
+        this.frame = 0;
+        this.score = 0;
+    }
+});
+
 window.onload = function() {
-    game = new Game();
-    game.preload(CHARA_IMAGE_NAME);
-    game.fps = 30;
+    game = new KumaGame();
 
     game.onload = function() {
         var scene = game.rootScene;
@@ -97,8 +106,6 @@ window.onload = function() {
         var scoreLabel = null;
         var timerLabel = null;
 
-        game.frame = 0;
-        game.score = 0;
 
         scoreLabel = new ScoreLabel({
             x: 10,
