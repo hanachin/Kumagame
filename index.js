@@ -77,12 +77,17 @@ var TimerLabel = Class.create(Label, {
         this.font = "11px'Consolas','Monaco','MS ゴシック'";
         this.text = 'Timer:';
         this.moveTo(options.x, options.y);
-        this.updateTimeLeft(options.timeLeft);
-    },
-    updateTimeLeft: function(timeLeft) {
-        this.text = "Timer:" + timeLeft;
+        this.timeLeft = options.timeLeft
 
-        if (timeLeft < 10) {
+        this.updateTimeLeft();
+    },
+    onenterframe: function() {
+        this.updateTimeLeft();
+    },
+    updateTimeLeft: function() {
+        this.text = "Timer:" + this.timeLeft();
+
+        if (this.timeLeft() < 10) {
             this.color = 'red';
         }
     }
@@ -134,10 +139,13 @@ var KumaGame = Class.create(Game, {
         });
     },
     initTimerLabel: function() {
+        var self = this;
         this.timerLabel = new TimerLabel({
             x: 250,
             y: 10,
-            timeLeft: this.timeLimit
+            timeLeft: function() {
+                return self.timeLeft();
+            }
         });
     }
 });
@@ -152,7 +160,6 @@ window.onload = function() {
         var scene = game.rootScene;
 
         scene.onenterframe = function() {
-            game.timerLabel.updateTimeLeft(game.timeLeft());
             if (game.isEnd()) {
                 game.end();
             }
