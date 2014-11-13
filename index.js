@@ -93,6 +93,7 @@ var KumaGame = Class.create(Game, {
         this.frame = 0;
         this.score = 0;
         this.timeLimit = options.timeLimit;
+        this.kumaNum = options.kumaNum;
 
         this.rootScene.backgroundColor = 'black';
     },
@@ -113,7 +114,8 @@ var KumaGame = Class.create(Game, {
 
 window.onload = function() {
     game = new KumaGame({
-        timeLimit: 30
+        timeLimit: 30,
+        kumaNum: 16
     });
 
     game.onload = function() {
@@ -143,7 +145,7 @@ window.onload = function() {
         };
 
 
-        for (var i = 0; i < 16; ++i) {
+        for (var i = 0; i < game.kumaNum; ++i) {
             var kuma = new KumaSprite();
             kuma.moveTo(Math.random() * (game.width - kuma.width), Math.random() * (game.height - kuma.height));
             scene.addChild(kuma);
