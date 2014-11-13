@@ -133,6 +133,11 @@ var KumaGame = Class.create(Game, {
 
         this.initTimerLabel();
         this.rootScene.addChild(this.timerLabel);
+
+        this.initKumas();
+        this.kumas.forEach(function(kuma) {
+          this.rootScene.addChild(kuma);
+        });
     },
     initScoreLabel: function() {
         var self = this;
@@ -153,6 +158,15 @@ var KumaGame = Class.create(Game, {
                 return self.timeLeft();
             }
         });
+    },
+    initKumas: function() {
+        var kumas = [];
+        for (var i = 0; i < this.kumaNum; ++i) {
+            var kuma = new KumaSprite();
+            kuma.moveTo(Math.random() * (this.width - kuma.width), Math.random() * (this.height - kuma.height));
+            kumas.push(kuma);
+        }
+        this.kumas = kumas;
     }
 });
 
@@ -170,12 +184,6 @@ window.onload = function() {
                 game.end();
             }
         };
-
-        for (var i = 0; i < game.kumaNum; ++i) {
-            var kuma = new KumaSprite();
-            kuma.moveTo(Math.random() * (game.width - kuma.width), Math.random() * (game.height - kuma.height));
-            scene.addChild(kuma);
-        }
     };
 
     game.start();
