@@ -124,9 +124,8 @@ window.onload = function() {
             timerLabel.updateTimeLeft(timeLeft);
 
             if (timeLeft <= 0) {
-                var score = game.score;
                 var message = game.score + "点獲得しました!";
-                alert(score + ',' + message);
+                alert(message);
                 scene.onenterframe = null;
             }
         };
