@@ -3,7 +3,6 @@
 enchant();
 
 var CHARA_IMAGE_NAME = "http://enchantjs.com/assets/images/chara1.gif";
-var GAME_LIMIT_TIME = 30;
 var KUMA_SCORE = 10;
 var game = null;
 
@@ -93,6 +92,7 @@ var KumaGame = Class.create(Game, {
         this.fps = 30;
         this.frame = 0;
         this.score = 0;
+        this.timeLimit = options.timeLimit;
 
         this.rootScene.backgroundColor = 'black';
     },
@@ -102,7 +102,9 @@ var KumaGame = Class.create(Game, {
 });
 
 window.onload = function() {
-    game = new KumaGame();
+    game = new KumaGame({
+        timeLimit: 30
+    });
 
     game.onload = function() {
         var scene = game.rootScene;
@@ -116,14 +118,14 @@ window.onload = function() {
         var timerLabel = new TimerLabel({
             x: 250,
             y: 10,
-            timeLeft: GAME_LIMIT_TIME
+            timeLeft: game.timeLimit
         });
         scene.addChild(timerLabel);
 
         scene.onenterframe = function() {
             scoreLabel.updateScore(game.score);
 
-            var timeLeft = GAME_LIMIT_TIME - Math.floor(game.frame / game.fps);
+            var timeLeft = game.timeLimit - Math.floor(game.frame / game.fps);
             timerLabel.updateTimeLeft(timeLeft);
 
             if (timeLeft <= 0) {
