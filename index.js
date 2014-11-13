@@ -101,6 +101,9 @@ var KumaGame = Class.create(Game, {
     },
     timeLeft: function() {
         return this.timeLimit - Math.floor(this.frame / this.fps);
+    },
+    isEnd: function() {
+        return this.timeLeft() <= 0;
     }
 });
 
@@ -130,7 +133,7 @@ window.onload = function() {
 
             timerLabel.updateTimeLeft(game.timeLeft());
 
-            if (game.timeLeft() <= 0) {
+            if (game.isEnd()) {
                 alert(game.scoreMessage());
                 scene.onenterframe = null;
             }
