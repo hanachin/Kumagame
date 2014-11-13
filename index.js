@@ -93,6 +93,8 @@ var KumaGame = Class.create(Game, {
         this.fps = 30;
         this.frame = 0;
         this.score = 0;
+
+        this.rootScene.backgroundColor = 'black';
     }
 });
 
@@ -101,7 +103,6 @@ window.onload = function() {
 
     game.onload = function() {
         var scene = game.rootScene;
-        scene.backgroundColor = "black";
 
         var scoreLabel = new ScoreLabel({
             x: 10,
