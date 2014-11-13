@@ -5,9 +5,11 @@ enchant();
 var KumaSprite = Class.create(Sprite, {
     initialize: function(options) {
         Sprite.call(this, 32, 32);
-        this.score = options.score || KumaSprite.SCORE
+
         this.deadCallback = options.dead;
         this.image = options.image;
+        this.score = options.score || KumaSprite.SCORE
+
         var deg = Math.random() * 360 * Math.PI / 180;
         this.vx = Math.cos(deg);
         this.vy = Math.sin(deg);
@@ -44,6 +46,7 @@ var KumaSprite = Class.create(Sprite, {
 
     dead: function() {
         this.parentNode.removeChild(this);
+
         if (this.deadCallback) {
             this.deadCallback(this);
         }
@@ -115,6 +118,7 @@ var KumaGame = Class.create(Game, {
         this.preload(KumaSprite.CHARA_IMAGE_NAME);
         this.fps = 30;
         this.frame = 0;
+
         this.score = 0;
         this.timeLimit = options.timeLimit;
         this.kumaNum = options.kumaNum;
