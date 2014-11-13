@@ -110,7 +110,13 @@ var KumaGame = Class.create(Game, {
         return this.score + '点獲得しました!';
     },
     timeLeft: function() {
-        return this.timeLimit - Math.floor(this.frame / this.fps);
+        var timeLeft = this.timeLimit - Math.floor(this.frame / this.fps);
+
+        if (timeLeft > 0) {
+            return timeLeft;
+        } else {
+            return 0;
+        }
     },
     isEnd: function() {
         return this.timeLeft() <= 0;
@@ -164,7 +170,6 @@ window.onload = function() {
                 game.end();
             }
         };
-
 
         for (var i = 0; i < game.kumaNum; ++i) {
             var kuma = new KumaSprite();
