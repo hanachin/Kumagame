@@ -52,6 +52,20 @@ var KumaSprite = Class.create(Sprite, {
     }
 });
 
+var ScoreLabel = Class.create(Label, {
+    initialize: function(options) {
+        Label.call(this);
+
+        this.color = 'white';
+        this.font = "11px'Consolas','Monaco','MS ゴシック'";
+        this.text = 'Score:';
+        this.moveTo(options.x, options.y);
+    },
+    updateScore: function(score) {
+        this.text = 'Score:' + game.score;
+    }
+});
+
 window.onload = function() {
     game = new Game();
     game.preload(CHARA_IMAGE_NAME);
@@ -67,12 +81,8 @@ window.onload = function() {
         game.frame = 0;
         game.score = 0;
 
-        scoreLabel = new Label();
+        scoreLabel = new ScoreLabel({x:10, y:10});
         scene.addChild(scoreLabel);
-        scoreLabel.moveTo(10, 10);
-        scoreLabel.color = "white";
-        scoreLabel.font = "11px'Consolas','Monaco','MS ゴシック'";
-        scoreLabel.text = "Score:";
 
         timerLabel = new Label();
         scene.addChild(timerLabel);
@@ -82,8 +92,7 @@ window.onload = function() {
         timerLabel.text = "Timer:";
 
         scene.onenterframe = function() {
-
-            scoreLabel.text = "Score:" + game.score;
+            scoreLabel.updateScore(game.score);
 
             var time = GAME_LIMIT_TIME - Math.floor(game.frame / game.fps);
             timerLabel.text = "Timer:" + time;
