@@ -159,14 +159,17 @@ var KumaGame = Class.create(Game, {
             }
         });
     },
+    createKuma: function() {
+        var kuma = new KumaSprite({
+            image: this.assets[KumaSprite.CHARA_IMAGE_NAME]
+        });
+        kuma.moveTo(Math.random() * (this.width - kuma.width), Math.random() * (this.height - kuma.height));
+        return kuma;
+    },
     initKumas: function() {
         var kumas = [];
         for (var i = 0; i < this.kumaNum; ++i) {
-            var kuma = new KumaSprite({
-                image: this.assets[KumaSprite.CHARA_IMAGE_NAME]
-            });
-            kuma.moveTo(Math.random() * (this.width - kuma.width), Math.random() * (this.height - kuma.height));
-            kumas.push(kuma);
+            kumas.push(this.createKuma());
         }
         this.kumas = kumas;
     }
