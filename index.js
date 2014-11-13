@@ -2,28 +2,23 @@
 
 enchant();
 
-var game = null;
-
 var KumaSprite = Class.create(Sprite, {
-
-    initialize: function() {
+    initialize: function(options) {
         Sprite.call(this, 32, 32);
 
-        this.image = game.assets[KumaSprite.CHARA_IMAGE_NAME];
+        this.image = options.image;
         var deg = Math.random() * 360 * Math.PI / 180;
         this.vx = Math.cos(deg);
         this.vy = Math.sin(deg);
     },
 
-
     onenterframe: function() {
-
         this.moveBy(this.vx * 4, this.vy * 4);
 
         var left = 0;
-        var right = game.width - this.width;
+        var right = this.parentNode.width - this.width;
         var top = 0;
-        var bottom = game.height - this.height;
+        var bottom = this.parentNode.height - this.height;
         if (this.x < left) {
             this.x = left;
             this.vx *= -1;
@@ -41,7 +36,6 @@ var KumaSprite = Class.create(Sprite, {
             this.vy *= -1;
         }
     },
-
 
     ontouchstart: function() {
         this.parentNode.removeChild(this);
@@ -136,7 +130,7 @@ var KumaGame = Class.create(Game, {
 
         this.initKumas();
         this.kumas.forEach(function(kuma) {
-          scene.addChild(kuma);
+            scene.addChild(kuma);
         });
 
         scene.onenterframe = function() {
@@ -168,7 +162,9 @@ var KumaGame = Class.create(Game, {
     initKumas: function() {
         var kumas = [];
         for (var i = 0; i < this.kumaNum; ++i) {
-            var kuma = new KumaSprite();
+            var kuma = new KumaSprite({
+                image: this.assets[KumaSprite.CHARA_IMAGE_NAME]
+            });
             kuma.moveTo(Math.random() * (this.width - kuma.width), Math.random() * (this.height - kuma.height));
             kumas.push(kuma);
         }
@@ -177,7 +173,7 @@ var KumaGame = Class.create(Game, {
 });
 
 window.onload = function() {
-    game = new KumaGame({
+    var game = new KumaGame({
         timeLimit: 30,
         kumaNum: 16
     });
