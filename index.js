@@ -98,6 +98,9 @@ var KumaGame = Class.create(Game, {
     },
     scoreMessage: function() {
         return this.score + '点獲得しました!';
+    },
+    timeLeft: function() {
+        return this.timeLimit - Math.floor(this.frame / this.fps);
     }
 });
 
@@ -125,10 +128,9 @@ window.onload = function() {
         scene.onenterframe = function() {
             scoreLabel.updateScore(game.score);
 
-            var timeLeft = game.timeLimit - Math.floor(game.frame / game.fps);
-            timerLabel.updateTimeLeft(timeLeft);
+            timerLabel.updateTimeLeft(game.timeLeft());
 
-            if (timeLeft <= 0) {
+            if (game.timeLeft() <= 0) {
                 alert(game.scoreMessage());
                 scene.onenterframe = null;
             }
