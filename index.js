@@ -45,12 +45,18 @@ var KumaSprite = Class.create(Sprite, {
     dead: function() {
         this.parentNode.removeChild(this);
         if (this.deadCallback) {
-          this.deadCallback(this);
+            this.deadCallback(this);
         }
     },
 
     ontouchstart: function() {
         this.dead();
+    },
+
+    放浪: function() {
+        var randomX = Math.random() * (this.parentNode.width - this.width);
+        var randomY = Math.random() * (this.parentNode.height - this.height);
+        this.moveTo(randomX, randomY);
     }
 });
 KumaSprite.CHARA_IMAGE_NAME = "http://enchantjs.com/assets/images/chara1.gif";
@@ -147,7 +153,9 @@ var KumaGame = Class.create(Game, {
         scene.addChild(this.createTimerLabel());
 
         for (var i = 0; i < this.kumaNum; ++i) {
-            scene.addChild(this.createKuma());
+            var kuma = this.createKuma();
+            scene.addChild(kuma);
+            kuma.放浪();
         }
 
         scene.onenterframe = function() {
@@ -187,7 +195,6 @@ var KumaGame = Class.create(Game, {
                 game.score += k.score;
             }
         });
-        kuma.moveTo(Math.random() * (this.width - kuma.width), Math.random() * (this.height - kuma.height));
         return kuma;
     }
 });
