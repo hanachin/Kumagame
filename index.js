@@ -66,6 +66,25 @@ var ScoreLabel = Class.create(Label, {
     }
 });
 
+var TimerLabel = Class.create(Label, {
+    initialize: function(options) {
+        Label.call(this);
+
+        this.color = 'white';
+        this.font = "11px'Consolas','Monaco','MS ゴシック'";
+        this.text = 'Timer:';
+        this.moveTo(options.x, options.y);
+        this.updateTimeLeft(options.timeLeft);
+    },
+    updateTimeLeft: function(timeLeft) {
+        this.text = "Timer:" + timeLeft;
+
+        if (timeLeft < 10) {
+            this.color = 'red';
+        }
+    }
+});
+
 window.onload = function() {
     game = new Game();
     game.preload(CHARA_IMAGE_NAME);
@@ -81,26 +100,26 @@ window.onload = function() {
         game.frame = 0;
         game.score = 0;
 
-        scoreLabel = new ScoreLabel({x:10, y:10});
+        scoreLabel = new ScoreLabel({
+            x: 10,
+            y: 10
+        });
         scene.addChild(scoreLabel);
 
-        timerLabel = new Label();
+        timerLabel = new TimerLabel({
+            x: 250,
+            y: 10,
+            timeLeft: GAME_LIMIT_TIME
+        });
         scene.addChild(timerLabel);
-        timerLabel.moveTo(250, 10);
-        timerLabel.color = "white";
-        timerLabel.font = "11px'Consolas','Monaco','MS ゴシック'";
-        timerLabel.text = "Timer:";
 
         scene.onenterframe = function() {
             scoreLabel.updateScore(game.score);
 
-            var time = GAME_LIMIT_TIME - Math.floor(game.frame / game.fps);
-            timerLabel.text = "Timer:" + time;
-            if (time < 10) {
-                timerLabel.color = "red";
-            }
+            var timeLeft = GAME_LIMIT_TIME - Math.floor(game.frame / game.fps);
+            timerLabel.updateTimeLeft(timeLeft);
 
-            if (time <= 0) {
+            if (timeLeft <= 0) {
                 var score = game.score;
                 var message = game.score + "点獲得しました!";
                 alert(score + ',' + message);
