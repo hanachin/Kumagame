@@ -1,3 +1,5 @@
+"use strict";
+
 enchant();
 
 var CHARA_IMAGE_NAME = "http://enchantjs.com/assets/images/chara1.gif";
