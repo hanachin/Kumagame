@@ -2,9 +2,7 @@
 
 enchant();
 
-var KUMA_SCORE = 10;
 var game = null;
-
 
 var KumaSprite = Class.create(Sprite, {
 
@@ -50,7 +48,7 @@ var KumaSprite = Class.create(Sprite, {
     }
 });
 KumaSprite.CHARA_IMAGE_NAME = "http://enchantjs.com/assets/images/chara1.gif";
-
+KumaSprite.KUMA_SCORE = 10;
 
 var ScoreLabel = Class.create(Label, {
     initialize: function(options) {
