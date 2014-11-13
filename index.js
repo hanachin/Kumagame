@@ -2,7 +2,6 @@
 
 enchant();
 
-var CHARA_IMAGE_NAME = "http://enchantjs.com/assets/images/chara1.gif";
 var KUMA_SCORE = 10;
 var game = null;
 
@@ -12,7 +11,7 @@ var KumaSprite = Class.create(Sprite, {
     initialize: function() {
         Sprite.call(this, 32, 32);
 
-        this.image = game.assets[CHARA_IMAGE_NAME];
+        this.image = game.assets[KumaSprite.CHARA_IMAGE_NAME];
         var deg = Math.random() * 360 * Math.PI / 180;
         this.vx = Math.cos(deg);
         this.vy = Math.sin(deg);
@@ -50,6 +49,8 @@ var KumaSprite = Class.create(Sprite, {
         this.parentNode.removeChild(this);
     }
 });
+KumaSprite.CHARA_IMAGE_NAME = "http://enchantjs.com/assets/images/chara1.gif";
+
 
 var ScoreLabel = Class.create(Label, {
     initialize: function(options) {
@@ -97,7 +98,7 @@ var KumaGame = Class.create(Game, {
     initialize: function(options) {
         Game.call(this);
 
-        this.preload(CHARA_IMAGE_NAME);
+        this.preload(KumaSprite.CHARA_IMAGE_NAME);
         this.fps = 30;
         this.frame = 0;
         this.score = 0;
