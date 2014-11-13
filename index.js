@@ -103,17 +103,13 @@ window.onload = function() {
         var scene = game.rootScene;
         scene.backgroundColor = "black";
 
-        var scoreLabel = null;
-        var timerLabel = null;
-
-
-        scoreLabel = new ScoreLabel({
+        var scoreLabel = new ScoreLabel({
             x: 10,
             y: 10
         });
         scene.addChild(scoreLabel);
 
-        timerLabel = new TimerLabel({
+        var timerLabel = new TimerLabel({
             x: 250,
             y: 10,
             timeLeft: GAME_LIMIT_TIME
