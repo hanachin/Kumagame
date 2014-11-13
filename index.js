@@ -62,9 +62,11 @@ var ScoreLabel = Class.create(Label, {
         this.score = options.score;
         this.updateScore();
     },
+
     onenterframe: function() {
         this.updateScore();
     },
+
     updateScore: function() {
         this.text = 'Score:' + this.score();
     }
@@ -82,9 +84,11 @@ var TimerLabel = Class.create(Label, {
 
         this.updateTimeLeft();
     },
+
     onenterframe: function() {
         this.updateTimeLeft();
     },
+
     updateTimeLeft: function() {
         this.text = "Timer:" + this.timeLeft();
 
@@ -105,9 +109,11 @@ var KumaGame = Class.create(Game, {
         this.timeLimit = options.timeLimit;
         this.kumaNum = options.kumaNum;
     },
+
     scoreMessage: function() {
         return this.score + '点獲得しました!';
     },
+
     timeLeft: function() {
         var timeLeft = this.timeLimit - Math.floor(this.frame / this.fps);
 
@@ -117,13 +123,16 @@ var KumaGame = Class.create(Game, {
             return 0;
         }
     },
+
     isEnd: function() {
         return this.timeLeft() <= 0;
     },
+
     end: function() {
         alert(this.scoreMessage());
         this.rootScene.onenterframe = null;
     },
+
     onload: function() {
         var game = this;
         var scene = this.rootScene;
@@ -143,6 +152,7 @@ var KumaGame = Class.create(Game, {
             }
         };
     },
+
     createScoreLabel: function() {
         var self = this;
         return new ScoreLabel({
@@ -153,6 +163,7 @@ var KumaGame = Class.create(Game, {
             }
         });
     },
+
     createTimerLabel: function() {
         var self = this;
         return new TimerLabel({
@@ -163,6 +174,7 @@ var KumaGame = Class.create(Game, {
             }
         });
     },
+
     createKuma: function() {
         var kuma = new KumaSprite({
             image: this.assets[KumaSprite.CHARA_IMAGE_NAME]
